@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear y Ver Cursos</title>
+   
+    <link rel="stylesheet" href="public/css/navbar.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+
+    <header style="display: grid; grid-template-columns: 1fr auto  ;">
+        <h1>Sistema de Registro y Consulta de Matrículas</h1>
+        <button class="btn-salir" id="logoutButton">
+      
+
+            <svg class="fas fa-sign-out-alt" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 3a1 1 0 0 1 .117 1.993L12 5H7a1 1 0 0 0-.993.883L6 6v12a1 1 0 0 0 .883.993L7 19h4.5a1 1 0 0 1 .117 1.993L11.5 21H7a3 3 0 0 1-2.995-2.824L4 18V6a3 3 0 0 1 2.824-2.995L7 3zm5.707 5.464l2.828 2.829a1 1 0 0 1 0 1.414l-2.828 2.829a1 1 0 1 1-1.414-1.415L17.414 13H12a1 1 0 1 1 0-2h5.414l-1.121-1.121a1 1 0 0 1 1.414-1.415"/></g></svg>
+        </button>
+       
+    </header>
+
+    <nav>
+      
+        <a href="inscripcion_cursos.html">Inscripción en Cursos</a>
+        <a href="consulta_matricula.html">Consulta de Matrículas</a>
+        <a href="gestion_ursos.html">Gestión de Cursos</a>
+        <a href="notificacion.html">Notificaciones</a>
+        <a href="reportes.html">Reporte de Matrículas</a>
+    </nav>
+    <body class="bg-gray-100 ">
+
+        <div class="container mx-auto">
+          <!-- Grid responsive con Tailwind CSS -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- Formulario de creación de curso -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h1 class="text-2xl font-semibold text-gray-700 mb-4">Crear un Nuevo Curso</h1>
+              <form id="crearCursoForm">
+                <div class="mb-4">
+                  <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre del Curso:</label>
+                  <input type="text" id="nombre" name="nombre" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                </div>
+      
+                <div class="mb-4">
+                  <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción:</label>
+                  <textarea id="descripcion" name="descripcion" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                </div>
+      
+                <div class="mb-4">
+                  <label for="fecha_inicio" class="block text-sm font-medium text-gray-700">Fecha de Inicio:</label>
+                  <input type="date" id="fecha_inicio" name="fecha_inicio" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                </div>
+      
+                <div class="mb-4">
+                  <label for="fecha_fin" class="block text-sm font-medium text-gray-700">Fecha de Fin:</label>
+                  <input type="date" id="fecha_fin" name="fecha_fin" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                </div>
+      
+                <div class="flex justify-end">
+                  <input type="submit" value="Crear Curso" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 sm:text-sm">
+                </div>
+              </form>
+      
+             
+            </div>
+      
+            <!-- Tabla de cursos -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-2xl font-semibold text-gray-700 mb-4">Cursos Disponibles</h2>
+              <div class="overflow-x-auto">
+                <table id="tablaCursos" class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+                  <thead class="bg-blue-500 text-white">
+                    <tr>
+                      <th class="px-4 py-2 text-left">ID</th>
+                      <th class="px-4 py-2 text-left">Nombre</th>
+                      <th class="px-4 py-2 text-left">Descripción</th>
+                      <th class="px-4 py-2 text-left">Fecha de Inicio</th>
+                      <th class="px-4 py-2 text-left">Fecha de Fin</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Aquí irán los datos de los cursos -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+        <div id="mensaje" style="display: none;"></div>
+    <script>
+
+function logout() {
+        localStorage.removeItem('id_usuario');
+
+        window.location.href = 'index.html'; 
+    }
+
+    document.getElementById('logoutButton').addEventListener('click', logout);
+
+
+const idUsuario = localStorage.getItem('id_usuario');
+
+if (!idUsuario) {
+    window.location.href = 'login.html'; 
+}
+        function cargarCursos() {
+            fetch('conexion/cursos/listado.php')
+                .then(response => response.json())
+                .then(cursos => {
+                    const tbody = document.querySelector('#tablaCursos tbody');
+                    tbody.innerHTML = '';  
+
+                    cursos.forEach(curso => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${curso.id}</td>
+                            <td>${curso.nombre}</td>
+                            <td>${curso.descripcion}</td>
+                            <td>${curso.fecha_inicio}</td>
+                            <td>${curso.fecha_fin}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al cargar los cursos:', error);
+                });
+        }
+
+        window.addEventListener('DOMContentLoaded', cargarCursos);
+
+        // Evento para crear un curso y actualizar la tabla
+        document.getElementById('crearCursoForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const nombre = document.getElementById('nombre').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const fecha_inicio = document.getElementById('fecha_inicio').value;
+            const fecha_fin = document.getElementById('fecha_fin').value;
+
+            const data = {
+                nombre: nombre,
+                descripcion: descripcion,
+                fecha_inicio: fecha_inicio,
+                fecha_fin: fecha_fin
+            };
+
+            fetch('conexion/cursos/crear.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(data).toString()
+            })
+            .then(response => response.text())
+            .then(data => {
+
+                mostrarMensaje(data)
+                cargarCursos();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('mensaje').innerHTML = `<p>Error al crear el curso. Intenta nuevamente.</p>`;
+            });
+        });
+
+        function mostrarMensaje(mensaje) {
+            const mensajeDiv = document.getElementById('mensaje');
+            mensajeDiv.textContent = mensaje;
+            mensajeDiv.style.display = 'block'; 
+
+            // Hacer desaparecer el mensaje después de 3 segundos
+            setTimeout(function() {
+                mensajeDiv.style.opacity = '0'; // Gradualmente desaparecer el mensaje
+            }, 2000); // 2 segundos antes de empezar a desaparecer
+
+            // Eliminar el mensaje del DOM después de 3.5 segundos (un poco más de tiempo para la transición)
+            setTimeout(function() {
+                mensajeDiv.style.display = 'none'; // Ocultar completamente después de desaparecer
+            }, 3500);
+        }
+    </script>
+</body>
+</html>

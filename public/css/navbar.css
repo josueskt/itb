@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav {
+    background-color: #444;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav a {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    flex: 1 1 150px; /* Hace que los enlaces se ajusten a pantallas pequeñas */
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+}
+
+.content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.content p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 18px;
+    }
+
+    nav a {
+        padding: 10px;
+        font-size: 14px;
+        flex: 1 1 100%; /* Los enlaces ocuparán toda la fila en pantallas pequeñas */
+    }
+
+    .content h2 {
+        font-size: 20px;
+    }
+
+    .content p {
+        font-size: 16px;
+    }
+}
+
+  /* Estilos para el mensaje */
+  #mensaje {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+
+
+.btn-salir {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff4d4d; /* Color rojo */
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+/* Estilo para el icono */
+.btn-salir i {
+    margin-right: 8px; /* Espacio entre el icono y el texto */
+    font-size: 18px;
+}
+
+/* Efecto al pasar el mouse */
+.btn-salir:hover {
+    background-color: #e60000; /* Un rojo más oscuro */
+}
+
+/* Efecto al presionar el botón */
+.btn-salir:active {
+    background-color: #cc0000; /* Un rojo aún más oscuro */
+}

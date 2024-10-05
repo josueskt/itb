@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Matrícula</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            margin: 10px 0 5px;
+            display: block;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+     <link rel="stylesheet" href="public/css/navbar.css">
+</head>
+<body>
+    <header style="display: grid; grid-template-columns: 1fr auto  ;">
+        <h1>Sistema de Registro y Consulta de Matrículas</h1>
+        <button class="btn-salir" id="logoutButton">
+      
+
+            <svg class="fas fa-sign-out-alt" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 3a1 1 0 0 1 .117 1.993L12 5H7a1 1 0 0 0-.993.883L6 6v12a1 1 0 0 0 .883.993L7 19h4.5a1 1 0 0 1 .117 1.993L11.5 21H7a3 3 0 0 1-2.995-2.824L4 18V6a3 3 0 0 1 2.824-2.995L7 3zm5.707 5.464l2.828 2.829a1 1 0 0 1 0 1.414l-2.828 2.829a1 1 0 1 1-1.414-1.415L17.414 13H12a1 1 0 1 1 0-2h5.414l-1.121-1.121a1 1 0 0 1 1.414-1.415"/></g></svg>
+        </button>
+       
+    </header>
+
+    <nav>
+      
+        <a href="inscripcion_cursos.html">Inscripción en Cursos</a>
+        <a href="consulta_matricula.html">Consulta de Matrículas</a>
+        <a href="gestion_ursos.html">Gestión de Cursos</a>
+        <a href="notificacion.html">Notificaciones</a>
+        <a href="reportes.html">Reporte de Matrículas</a>
+    </nav>
+
+    <h2>Formulario de Matrícula</h2>
+    
+    <form id="matriculaForm">
+        <label for="curso">Selecciona un Curso:</label>
+        <select id="curso" name="curso" required>
+            <option value="">Selecciona un curso</option>
+            <!-- Los cursos se cargarán aquí mediante JavaScript -->
+        </select>
+        
+        <button type="submit">Inscribirse</button>
+    </form>
+
+    <div id="mensaje" style="display: none;"></div>
+
+    <script>
+
+function logout() {
+        localStorage.removeItem('id_usuario');
+
+        window.location.href = 'index.html'; 
+    }
+
+    document.getElementById('logoutButton').addEventListener('click', logout);
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarCursos();
+        });
+
+        // Función para cargar los cursos disponibles
+        function cargarCursos() {
+            fetch('conexion/cursos/listado.php') // Asegúrate de que el archivo PHP devuelva un JSON con los cursos
+                .then(response => response.json())
+                .then(cursos => {
+                    const selectCurso = document.getElementById('curso');
+                    cursos.forEach(curso => {
+                        const option = document.createElement('option');
+                        option.value = curso.id;
+                        option.textContent = `${curso.nombre} (${curso.fecha_inicio} - ${curso.fecha_fin})`;
+                        selectCurso.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al cargar los cursos:', error);
+                    alert('Error al cargar los cursos');
+                });
+        }
+
+        // Al enviar el formulario, capturamos el evento y lo manejamos con JavaScript
+        document.getElementById('matriculaForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar envío por defecto del formulario
+
+            const cursoId = document.getElementById('curso').value;
+            const usuarioId = localStorage.getItem('id_usuario'); // Recuperamos el ID del usuario desde el token
+
+            if (!usuarioId) {
+                alert('No se ha encontrado un usuario válido. Inicia sesión primero.');
+                return;
+            }
+
+            if (!cursoId) {
+                alert('Por favor, selecciona un curso.');
+                return;
+            }
+
+            // Enviar la solicitud AJAX para crear la matrícula
+            const data = {
+                usuario_id: usuarioId,
+                curso_id: cursoId
+            };
+         
+            fetch('conexion/matriculas/crear.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(data).toString()
+            })
+            .then(response => response.text())
+            .then(data => {
+
+                mostrarMensaje(data)
+            })
+            .catch(error => {
+                console.error('Error al inscribir al curso:', error);
+                document.getElementById('mensaje').innerHTML = `<p>Error al inscribir al curso. Intenta nuevamente.</p>`;
+            });
+        });
+
+        function mostrarMensaje(mensaje) {
+            const mensajeDiv = document.getElementById('mensaje');
+            mensajeDiv.textContent = mensaje;
+            mensajeDiv.style.display = 'block'; 
+
+            // Hacer desaparecer el mensaje después de 3 segundos
+            setTimeout(function() {
+                mensajeDiv.style.opacity = '0'; // Gradualmente desaparecer el mensaje
+            }, 2000); // 2 segundos antes de empezar a desaparecer
+
+            // Eliminar el mensaje del DOM después de 3.5 segundos (un poco más de tiempo para la transición)
+            setTimeout(function() {
+                mensajeDiv.style.display = 'none'; // Ocultar completamente después de desaparecer
+            }, 3500);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registro y Consulta de Matrículas</title>
+   <link rel="stylesheet" href="public/css/navbar.css">
+</head>
+<body>
+
+    <header>
+        <h1>Sistema de Registro y Consulta de Matrículas</h1>
+    </header>
+
+    <nav>
+        <a href="register.html">Registro</a>
+        <a href="login.html">Inicio de Sesión</a>
+        <a href="login.html">Inscripción en Cursos</a>
+        <a href="login.html">Consulta de Matrículas</a>
+        <a href="login.html">Gestión de Cursos</a>
+        <a href="login.html">Notificaciones</a>
+        <a href="login.html">Reporte de Matrículas</a>
+    </nav>
+
+    <div class="content">
+        <h2>Bienvenido al Sistema de Registro y Consulta de Matrículas</h2>
+        <p>Seleccione una opción del menú para comenzar.</p>
+    </div>
+
+</body>
+<script>
+    const idUsuario = localStorage.getItem('id_usuario');
+
+if (idUsuario) {
+    window.location.href = 'inicio.html'; 
+}
+</script>
+</html>

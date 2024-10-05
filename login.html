@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="public/css/navbar.css">
+</head>
+<body>
+
+    <header>
+        <h1>Sistema de Registro y Consulta de Matrículas</h1>
+    </header>
+
+    <nav>
+        <a href="register.html">Registro</a>
+      
+        <a href="login.html">Inscripción en Cursos</a>
+        <a href="login.html">Consulta de Matrículas</a>
+        <a href="login.html">Gestión de Cursos</a>
+        <a href="login.html">Notificaciones</a>
+        <a href="login.html">Reporte de Matrículas</a>
+    </nav>
+    <div class="py-20">
+        <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+            <div class="hidden lg:block lg:w-1/2 bg-cover"
+                style="background-image:url('https://th.bing.com/th/id/R.226b6a18c177c21ae36b9441a65ab41b?rik=Lo1qvhIW9Y%2f9fg&riu=http%3a%2f%2fwww.noticias.unsl.edu.ar%2fwp-content%2fuploads%2f2017%2f12%2f10986712_740661106048894_5602525986264783024_n.jpg&ehk=crXvlMsL0ouqUoDXDOAXXqO5NEZZYDbkRw55nNe%2fae8%3d&risl=&pid=ImgRaw&r=0')">
+            </div>
+            <div class="w-full p-8 lg:w-1/2">
+                <h2 class="text-2xl font-semibold text-gray-700 text-center">Instituto Tecnologico Bolivariano</h2>
+                <p class="text-xl text-gray-600 text-center">Inicia seccion</p>
+              
+                <form id="loginForm">
+                    <div class="mt-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Correo Electrónico:</label>
+                        <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email" id="email" name="email" required>
+                       
+                
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="contrasena">Contraseña:</label>
+                        <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" id="contrasena" name="contrasena" required>
+                      
+                    </div>
+                   <div class="mt-8">
+                       <button class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" type="submit">Iniciar sesión</button>
+
+                   </div>
+                  
+            
+                </form>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <script>
+
+const idUsuario = localStorage.getItem('id_usuario');
+
+if (idUsuario) {
+    window.location.href = 'inicio.html'; 
+}
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar envío por defecto del formulario
+
+            // Obtener los valores del formulario
+            const email = document.getElementById('email').value;
+            const contrasena = document.getElementById('contrasena').value;
+
+            // Validar si los campos son correctos
+            if (!email || !contrasena) {
+                alert('Por favor, complete ambos campos');
+                return;
+            }
+
+            // Enviar los datos al servidor mediante Fetch API
+            fetch('conexion/login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${email}&contrasena=${contrasena}`
+            })
+            .then(response => response.json()) // Convertimos la respuesta a JSON
+            .then(data => {
+                if (data.message === "Login exitoso") {
+                    // Guardamos el ID del usuario en el localStorage
+                    localStorage.setItem('id_usuario', data.id_usuario);
+                    localStorage.setItem('usuario', data.usuario);
+
+                    
+                    // Redirigir al usuario a la página de inicio
+                    window.location.href = 'inicio.html';  // Redirige a la página de inicio
+                } else {
+                    // Si el login falla, mostramos el mensaje de error
+                    alert(data.message);  // Muestra el error (ej. "Credenciales incorrectas")
+                }
+            })
+            .catch(error => {
+                console.error('Error al iniciar sesión:', error);
+            });
+        });
+    </script>
+
+</body>
+</html>
