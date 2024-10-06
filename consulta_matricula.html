@@ -45,7 +45,7 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Aquí irán los datos de la tabla -->
+           
           </tbody>
         </table>
       </div>
@@ -66,15 +66,15 @@ function logout() {
                 if (!response.ok) {
                     throw new Error('Error en la respuesta del servidor: ' + response.status);
                 }
-                return response.json();  // Convertimos la respuesta a JSON
+                return response.json();  
             })
             .then(data => {
                 const tableBody = document.querySelector('#matriculas-table tbody');
 
-                // Si hay datos
+                
                 if (data.length > 0) {
                     data.forEach(matricula => {
-                        // Crear una nueva fila
+                       
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td class="px-4 py-2 text-left">${matricula.id}</td>
@@ -82,7 +82,7 @@ function logout() {
                             <td>${matricula.email}</td>
                             <td>${matricula.curso}</td>
                         `;
-                        // Agregar la fila al cuerpo de la tabla
+                     
                         tableBody.appendChild(row);
                     });
                 } else {

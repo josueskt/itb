@@ -8,10 +8,10 @@
 <body>
     
 </body>
-<script>let usuario_id = localStorage.getItem('id_usuario');  // Recuperamos el id_usuario desde el localStorage
+<script>let usuario_id = localStorage.getItem('id_usuario');  
 
     if (usuario_id) {
-        // Redirigimos al archivo PHP con el usuario_id como parámetro en la URL
+      
         window.location.href = '/proyecto/conexion/matriculas/reporte.php?usuario_id=' + usuario_id;
     } else {
         alert('No se encontró el ID del usuario en el almacenamiento local.');

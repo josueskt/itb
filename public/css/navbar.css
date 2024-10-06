@@ -30,7 +30,7 @@ nav a {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 16px;
-    flex: 1 1 150px; /* Hace que los enlaces se ajusten a pantallas pequeñas */
+    flex: 1 1 150px; 
 }
 
 nav a:hover {
@@ -52,7 +52,7 @@ nav a:hover {
     color: #555;
 }
 
-/* Media query para pantallas pequeñas */
+
 @media (max-width: 600px) {
     header h1 {
         font-size: 18px;
@@ -61,7 +61,7 @@ nav a:hover {
     nav a {
         padding: 10px;
         font-size: 14px;
-        flex: 1 1 100%; /* Los enlaces ocuparán toda la fila en pantallas pequeñas */
+        flex: 1 1 100%; 
     }
 
     .content h2 {
@@ -73,7 +73,7 @@ nav a:hover {
     }
 }
 
-  /* Estilos para el mensaje */
+ 
   #mensaje {
     position: fixed;
     top: 20px;
@@ -95,7 +95,7 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ff4d4d; /* Color rojo */
+    background-color: #ff4d4d; 
     color: white;
     font-size: 16px;
     padding: 10px 20px;
@@ -106,18 +106,18 @@ nav a:hover {
     text-align: center;
 }
 
-/* Estilo para el icono */
+
 .btn-salir i {
-    margin-right: 8px; /* Espacio entre el icono y el texto */
+    margin-right: 8px; 
     font-size: 18px;
 }
 
-/* Efecto al pasar el mouse */
+
 .btn-salir:hover {
-    background-color: #e60000; /* Un rojo más oscuro */
+    background-color: #e60000; 
 }
 
-/* Efecto al presionar el botón */
+
 .btn-salir:active {
-    background-color: #cc0000; /* Un rojo aún más oscuro */
+    background-color: #cc0000; 
 }

@@ -11,14 +11,14 @@
     margin: 20px;
     border-radius: 5px;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns by default */
+    grid-template-columns: 1fr 1fr; 
     max-width: 50%;
 }
 
 @media (max-width: 768px) {
     .notification {
-        grid-template-columns: 1fr; /* Single column for smaller screens */
-        max-width: 100%; /* Make it take up the full width on small screens */
+        grid-template-columns: 1fr; 
+        max-width: 100%; 
     }
 }
         .notification.read {
@@ -55,7 +55,7 @@
     </nav>
     <h1>Notificaciones</h1>
     <div id="notifications-container" class="">
-        <!-- Las notificaciones se cargarán aquí -->
+      
     </div>
 
     <script>
@@ -68,10 +68,10 @@ function logout() {
 
     document.getElementById('logoutButton').addEventListener('click', logout);
 
-        // Cambia este valor con el id del usuario actual
+      
         const usuario_id = localStorage.getItem('id_usuario');
    
-        // Función para obtener las notificaciones no leídas
+        
         function obtenerNotificaciones() {
     fetch('conexion/notificaciones/obtener.php', {
         method: 'POST',
@@ -89,7 +89,7 @@ function logout() {
             data.forEach(notification => {
                 const notificationElement = document.createElement('div');
                 notificationElement.classList.add('notification');
-                notificationElement.setAttribute('data-id', notification.id);  // Asignar el data-id al div
+                notificationElement.setAttribute('data-id', notification.id); 
                 if (notification.leido) {
                     notificationElement.classList.add('read');
                 }
@@ -110,7 +110,7 @@ function logout() {
     .catch(error => console.error('Error al cargar las notificaciones:', error));
 }
 
-        // Función para marcar la notificación como leída
+       
         function marcarComoLeido(notification_id) {
             fetch('conexion/notificaciones/marcar.php', {
                 method: 'POST',
@@ -122,7 +122,7 @@ function logout() {
             .then(response => response.text())
             .then(data => {
                 if (data === 'Notificación marcada como leída.') {
-                    // Actualizar la UI
+                 
                     const notificationElement = document.querySelector(`.notification[data-id="${notification_id}"]`);
                     notificationElement.classList.add('read');
                     notificationElement.querySelector('.mark-as-read').disabled = true;
@@ -134,7 +134,7 @@ function logout() {
             .catch(error => console.error('Error al marcar la notificación como leída:', error));
         }
 
-        // Cargar las notificaciones al cargar la página
+      
         window.onload = function() {
             obtenerNotificaciones();
         };

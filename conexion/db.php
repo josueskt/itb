@@ -1,8 +1,8 @@
 <?php
 $servidor = "localhost";
-$usuario = "root";  // Cambia según tu configuración de MySQL
-$clave = "";        // Cambia si tienes contraseña para MySQL
-$base_datos = "proyecto"; // Nombre de tu base de datos :3 
+$usuario = "root";  
+$clave = "";       
+$base_datos = "proyecto"; 
 
 $conn = new mysqli($servidor, $usuario, $clave, $base_datos);
 

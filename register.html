@@ -71,20 +71,20 @@ if (idUsuario) {
     window.location.href = 'inicio.html'; 
 }
         document.getElementById('registroForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar envío por defecto del formulario
+            event.preventDefault(); 
 
-            // Obtener los valores del formulario
+          
             const nombre = document.getElementById('nombre').value;
             const email = document.getElementById('email').value;
             const contrasena = document.getElementById('contrasena').value;
 
-            // Validar si los campos son correctos
+            
             if (!nombre || !email || !contrasena) {
                 alert('Por favor, complete todos los campos');
                 return;
             }
 
-            // Enviar los datos al servidor mediante Fetch API
+          
             fetch('conexion/register.php', {
                 method: 'POST',
                 headers: {
@@ -94,9 +94,9 @@ if (idUsuario) {
             })
             .then(response => response.text())
             .then(data => {
-                alert(data);  // Muestra la respuesta del servidor
+                alert(data);  
                 window.location.href = 'login.html';
-                document.getElementById('registroForm').reset();  // Limpiar formulario
+                document.getElementById('registroForm').reset();  
             })
             .catch(error => console.error('Error al registrar el usuario:', error));
         });

@@ -64,19 +64,19 @@ if (idUsuario) {
     window.location.href = 'inicio.html'; 
 }
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar envío por defecto del formulario
+            event.preventDefault(); 
 
-            // Obtener los valores del formulario
+            
             const email = document.getElementById('email').value;
             const contrasena = document.getElementById('contrasena').value;
 
-            // Validar si los campos son correctos
+           
             if (!email || !contrasena) {
                 alert('Por favor, complete ambos campos');
                 return;
             }
 
-            // Enviar los datos al servidor mediante Fetch API
+           
             fetch('conexion/login.php', {
                 method: 'POST',
                 headers: {
@@ -84,19 +84,19 @@ if (idUsuario) {
                 },
                 body: `email=${email}&contrasena=${contrasena}`
             })
-            .then(response => response.json()) // Convertimos la respuesta a JSON
+            .then(response => response.json()) 
             .then(data => {
                 if (data.message === "Login exitoso") {
-                    // Guardamos el ID del usuario en el localStorage
+                   
                     localStorage.setItem('id_usuario', data.id_usuario);
                     localStorage.setItem('usuario', data.usuario);
 
                     
-                    // Redirigir al usuario a la página de inicio
-                    window.location.href = 'inicio.html';  // Redirige a la página de inicio
+                   
+                    window.location.href = 'inicio.html'; 
                 } else {
-                    // Si el login falla, mostramos el mensaje de error
-                    alert(data.message);  // Muestra el error (ej. "Credenciales incorrectas")
+                   
+                    alert(data.message);  
                 }
             })
             .catch(error => {

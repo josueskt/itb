@@ -58,14 +58,15 @@
             mensajeDiv.textContent = mensaje;
             mensajeDiv.style.display = 'block'; 
 
-            // Hacer desaparecer el mensaje después de 3 segundos
+          
             setTimeout(function() {
-                mensajeDiv.style.opacity = '0'; // Gradualmente desaparecer el mensaje
-            }, 2000); // 2 segundos antes de empezar a desaparecer
+                mensajeDiv.style.opacity = '0'; 
+                
+            }, 2000); 
 
-            // Eliminar el mensaje del DOM después de 3.5 segundos (un poco más de tiempo para la transición)
+           
             setTimeout(function() {
-                mensajeDiv.style.display = 'none'; // Ocultar completamente después de desaparecer
+                mensajeDiv.style.display = 'none'; 
             }, 3500);
         }
 </script>
