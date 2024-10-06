@@ -8,7 +8,14 @@
 <body>
     
 </body>
-<script>let usuario_id = localStorage.getItem('id_usuario');  
+<script> const idUsuario = localStorage.getItem('id_usuario');
+      
+    if (!idUsuario) {
+        window.location.href = 'login.html';
+    }
+
+
+let usuario_id = localStorage.getItem('id_usuario');  
 
     if (usuario_id) {
       

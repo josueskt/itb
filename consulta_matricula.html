@@ -55,6 +55,11 @@
     </div>
 
     <script>
+      const idUsuario = localStorage.getItem('id_usuario');
+      
+      if (!idUsuario) {
+          window.location.href = 'login.html';
+      }
         document.getElementById('searchButton').addEventListener('click', function() {
             const searchName = document.getElementById('searchName').value;
             fetch('conexion/matriculas/listar.php?nombre=' + searchName)
